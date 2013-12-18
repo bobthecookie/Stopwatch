@@ -1,0 +1,35 @@
+name: Stopwatch
+main: io.github.bobthecookie.stopwatch.Stopwatch
+version: 0.1
+
+commands:
+  st:
+    description: Displays plugin information
+    usage: /st [subcommand]
+    permission: stopwatch.basic
+    permission-message: You don't have permission
+    backup:
+      description: Saves all current times
+      usage: /st backup
+      permission: stopwatch.mod
+      permission-message: You don't have permission
+    test:
+      description: Testing shit
+      usage: /st test
+      permission: stopwatch.admin
+      permission-message: You don't have permission
+    info:
+      usage: /st info <subcommand>
+      permission: stopwatch.basic
+      permission-message: You don't have permission
+      global:
+        description: Gets global info
+        usage: /st info global
+        permission: stopwatch.basic
+        permission-message: You don't have permission
+      player:
+        description: Gets player info
+        usage: /st info player <Player>
+        permission: stopwatch.basic
+        permission-message: You don't have permission    
+
