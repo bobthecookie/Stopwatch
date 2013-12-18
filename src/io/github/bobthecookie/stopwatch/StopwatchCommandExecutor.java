@@ -102,8 +102,10 @@ public class StopwatchCommandExecutor implements CommandExecutor {
 			sender.sendMessage(StopwatchVars.getInfo());
 			break;
 		case 1:
-			if (args[0].equalsIgnoreCase("help"))
-				sender.sendMessage("/st info global\tReturns global info\n/st info player <player>\tReturns player info");
+			if (args[0].equalsIgnoreCase("help")){
+				sender.sendMessage("/st info global           Returns global info");
+				sender.sendMessage("/st info player <player>  Returns player info");
+			}
 			if (args[0].equalsIgnoreCase("info"))
 				sender.sendMessage(StopwatchVars.getInfo());
 			if (args[0].equalsIgnoreCase("backup"))
