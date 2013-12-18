@@ -57,11 +57,22 @@ public class StopwatchUtil {
 
 	public static void updateCurrentTotalSessionTime() {
 		long t = 0;
+		Scanner f = null;
+		try{
+			f = new Scanner(StopwatchVars.getCentralLogFile());
+		} catch(FileNotFoundException e){
+			e.printStackTrace(StopwatchVars.getErrorLogger());
+		}
+		Object obj = null;
+		while(f.hasNext()){
+			obj = f.next();
+		}
+		t = (Long)obj;
 		for (StopwatchPlayer p: StopwatchVars.getPlugin().getPlayers()){
 			t += StopwatchVars.getPlugin().getCurrentSessionTime(p);
-			p.setTotalTime(0);
+			p.setTotalTime(StopwatchVars.getPlugin().getCurrentSessionTime(p));
 		}
-		StopwatchVars.addTime(t);
+		StopwatchVars.getCentralLogger().print(t);
 	}
 
 	private static long loadCentralLog(File file) {
@@ -173,7 +184,7 @@ public class StopwatchUtil {
 			writer.flush();
 			StopwatchVars.getPlugin().getLogger()
 					.info("Saved info for player " + name);
-			StopwatchVars.getCentralLogger().append("Saved info for player "+name+"\n");
+//			StopwatchVars.getCentralLogger().append("Saved info for player "+name+"\n");
 		}
 		if (StopwatchVars.getSaveTotalTime()) {
 			StopwatchVars.addTime(timeOnline);
