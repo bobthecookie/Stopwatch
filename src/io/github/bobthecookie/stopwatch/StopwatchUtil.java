@@ -57,8 +57,10 @@ public class StopwatchUtil {
 
 	public static void updateCurrentTotalSessionTime() {
 		long t = 0;
-		for (StopwatchPlayer p: StopwatchVars.getPlugin().getPlayers())
+		for (StopwatchPlayer p: StopwatchVars.getPlugin().getPlayers()){
 			t += StopwatchVars.getPlugin().getCurrentSessionTime(p);
+			p.setTotalTime(0);
+		}
 		StopwatchVars.addTime(t);
 	}
 
@@ -96,12 +98,11 @@ public class StopwatchUtil {
 	private static PrintStream initLogger(PrintStream logger, File file,
 			PrintStream defaultStream) {
 		if (!file.exists()) { // if the file doesn't exist create it
-//			file.getParentFile().mkdirs(); // create directories if they don't
+			file.getParentFile().mkdirs(); // create directories if they don't
 											// exist
 			try {
 				file.createNewFile(); // create the file
-				StopwatchVars.getPlugin().getLogger()
-						.info(file.getName() + " created!");
+				StopwatchVars.getPlugin().getLogger().info(file.getName() + " created!");
 			} catch (IOException e) {
 				StopwatchVars.getPlugin().getLogger()
 						.info("IOException on " + file.getName() + " creation");
