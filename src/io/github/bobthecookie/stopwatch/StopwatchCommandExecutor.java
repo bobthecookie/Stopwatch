@@ -174,11 +174,10 @@ public class StopwatchCommandExecutor implements CommandExecutor {
 	private int[] formatTimeToNumbers(long t) {
 		if (t == -1)
 			return null;
-		t /= 1000;
-		int h = ((int) t) / 3600;
-		t -= h * 3600;
-		int m = ((int) t) / 60;
-		t -= m * 60;
-		return new int[] { h, m, (int) t };
+		int[] n = new int[3];
+		n[2] = (int)((t/1000)%60);		//seconds
+		n[1] = (int)((t/(60000))%60);	//minutes
+		n[0] = (int)((t/(3600000))%24);	//hours
+		return n;
 	}
 }
