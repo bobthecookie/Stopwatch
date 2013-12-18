@@ -102,11 +102,15 @@ public class StopwatchCommandExecutor implements CommandExecutor {
 			sender.sendMessage(StopwatchVars.getInfo());
 			break;
 		case 1:
+			if (args[1].equalsIgnoreCase("help"))
+				sender.sendMessage("/st info global\tReturns global info\n/st info player <player>\tReturns player info");
 			if (args[0].equalsIgnoreCase("info"))
 				sender.sendMessage(StopwatchVars.getInfo());
 			if (args[0].equalsIgnoreCase("backup"))
-				if (sender.hasPermission("stopwatch.backup"))
+				if (sender.hasPermission("stopwatch.backup")){
 					StopwatchUtil.backup();
+					sender.sendMessage("Backup complete!");
+				}
 			if (args[0].equalsIgnoreCase("test")) {
 				long t = (long) (Math.random() * 10000);
 				String n = String.copyValueOf(new char[] { (char) (Math
@@ -118,7 +122,7 @@ public class StopwatchCommandExecutor implements CommandExecutor {
 		case 2: // /st < > < >
 			if (args[0].equalsIgnoreCase("info")) { // /st info
 				if (args[1].equalsIgnoreCase("global")) {
-					sender.sendMessage(getGlobalTime());
+//					sender.sendMessage(getGlobalTime());
 					StopwatchPlayer[] p = StopwatchUtil
 							.percentageTimeByPlayer();
 					sender.sendMessage("Players listed by percentage of total time they personally were on for:");
